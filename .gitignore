@@ -1,0 +1,7 @@
+# IntelliJ IDEA
+.idea
+*.iml
+
+# Build, compile, package and install
+build
+target
