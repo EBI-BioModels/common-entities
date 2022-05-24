@@ -14,10 +14,13 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id", nullable = false, unique = true)
     private Long id;
+    @Column(nullable = false, unique = true)
     private String username;
+    @Column(nullable = false)
     private String password;
+    @Column(nullable = false, unique = true)
     private String email;
 
     public Long getId() {
@@ -52,35 +55,31 @@ public class User implements UserDetails {
         this.email = email;
     }
 
+    /*@Column(name = "created_on")
+    private Date createdAt;
     public Date getCreatedAt() {
         return createdAt;
     }
-
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 
+    @Column(name = "updated_on")
+    private Date updatedAt;
     public Date getUpdatedAt() {
         return updatedAt;
     }
-
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
-
-    @Column(name = "CREATED_ON")
-    private Date createdAt;
-
-    @Column(name = "UPDATED_ON")
-    private Date updatedAt;
 
     @Column(name = "first_name")
     private String firstName;
 
     @Column(name = "last_name")
-    private String lastName;
+    private String lastName;*/
 
-    @Column(name = "enabled")
+    @Column(name = "enabled", nullable = false)
     private boolean enabled = true;
     public boolean getEnabled() {
         return this.enabled;
@@ -113,30 +112,54 @@ public class User implements UserDetails {
         this.passwordExpired = passwordExpired;
     }
 
-    // custom additions
     /**
      * The code with which a new user can validate the registration
      */
-    String registrationCode;
+    private String registrationCode;
+    public String getRegistrationCode() {
+        return registrationCode;
+    }
+    public void setRegistrationCode(String registrationCode) {
+        this.registrationCode = registrationCode;
+    }
     /**
      * The date when the registration code becomes invalid.
      */
-    Date registrationInvalidation;
+    private Date registrationInvalidation;
+    public Date getRegistrationInvalidation() {
+        return registrationInvalidation;
+    }
+    public void setRegistrationInvalidation(Date registrationInvalidation) {
+        this.registrationInvalidation = registrationInvalidation;
+    }
+
     /**
      * The code with which a user can reset a password
      */
-    String passwordForgottenCode;
+    private String passwordForgottenCode;
+    public String getPasswordForgottenCode() {
+        return passwordForgottenCode;
+    }
+    public void setPasswordForgottenCode(String passwordForgottenCode) {
+        this.passwordForgottenCode = passwordForgottenCode;
+    }
     /**
      * The date when the password forgotten code becomes invalid.
      */
-    Date passwordForgottenInvalidation;
-
+    private Date passwordForgottenInvalidation;
+    public Date getPasswordForgottenInvalidation() {
+        return passwordForgottenInvalidation;
+    }
+    public void setPasswordForgottenInvalidation(Date passwordForgottenInvalidation) {
+        this.passwordForgottenInvalidation = passwordForgottenInvalidation;
+    }
 
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(referencedColumnName = "id"))
 
+    @Column(nullable = false)
     private List<Authority> authorities;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -17,43 +17,35 @@ public class Person implements Serializable {
         this.id = id;
     }
 
-    private String firstName;
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
+    private String userRealName;
     public String getUserRealName() {
         return userRealName;
     }
-
     public void setUserRealName(String userRealName) {
         this.userRealName = userRealName;
     }
 
+    private String orcid;
     public String getOrcid() {
         return orcid;
     }
-
     public void setOrcid(String orcid) {
         this.orcid = orcid;
     }
 
+    /*private String firstName;
+    public String getFirstName() {
+        return firstName;
+    }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
     private String lastName;
-
-    private String userRealName;
-
-    private String orcid;
+    public String getLastName() {
+        return lastName;
+    }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }*/
 }
