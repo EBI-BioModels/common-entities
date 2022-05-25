@@ -168,6 +168,18 @@ public class User {
         this.authorities = authorities;
     }
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "person_id", referencedColumnName = "id")
+    private Person person;
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
     /*@Override
     public boolean isAccountNonExpired() {
         return !this.getAccountExpired();
