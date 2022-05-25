@@ -6,11 +6,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Table(name = "user")
 @Entity
-public class User implements UserDetails {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -156,20 +157,18 @@ public class User implements UserDetails {
 
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",
-            joinColumns = @JoinColumn(referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(referencedColumnName = "id"))
-
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     @Column(nullable = false)
-    private List<Role> authorities;
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
+    private Set<Role> authorities = new HashSet<>();
+    public Set<Role> getAuthorities() {
         return authorities;
     }
-    public void setAuthorities(List<Role> authorities) {
+    public void setAuthorities(Set<Role> authorities) {
         this.authorities = authorities;
     }
 
-    @Override
+    /*@Override
     public boolean isAccountNonExpired() {
         return !this.getAccountExpired();
     }
@@ -187,5 +186,5 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return this.getEnabled();
-    }
+    }*/
 }
