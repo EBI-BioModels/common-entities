@@ -1,13 +1,12 @@
 package net.biomodels.jummp.entities.security;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 public class Person implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
     public Long getId() {
@@ -25,6 +24,7 @@ public class Person implements Serializable {
         this.userRealName = userRealName;
     }
 
+    @Column(unique = true)
     private String orcid;
     public String getOrcid() {
         return orcid;

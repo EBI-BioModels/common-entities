@@ -160,12 +160,12 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(referencedColumnName = "id"))
 
     @Column(nullable = false)
-    private List<Authority> authorities;
+    private List<Role> authorities;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
     }
-    public void setAuthorities(List<Authority> authorities) {
+    public void setAuthorities(List<Role> authorities) {
         this.authorities = authorities;
     }
 
